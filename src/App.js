@@ -2,15 +2,28 @@ import "./App.css";
 import logo from "./TI-logo.png";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
-import { Container, Link, Box, CssBaseline, Grid } from "@mui/material";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  Container,
+  Link as MaterialLink,
+  Box,
+  Grid,
+  Typography,
+} from "@mui/material";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link as RouterLink,
+} from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
+import Navbar from "./Components/Navbar";
+import ReferraActivity from "./Components/ReferralActivity";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: red[700],
+      main: red[900],
     },
   },
 });
@@ -18,15 +31,35 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
       <div className="App">
-        <Box
-          component="img"
-          src={logo}
-          maxWidth={{ xs: 160 }}
-          maxHeight={{ xs: 90 }}
-        />
         <BrowserRouter>
+          <Grid container alignItems="center">
+            <Grid item>
+              <Box
+                component="img"
+                src={logo}
+                maxWidth={{ xs: 160 }}
+                maxHeight={{ xs: 90 }}
+              />
+            </Grid>
+            <Box width={20} />
+            <Grid item>
+              <MaterialLink
+                component={RouterLink}
+                to="/"
+                sx={{
+                  // marginBottom: -5,
+                  textDecoration: "none",
+                  color: "black",
+                }}
+              >
+                <Typography variant="h4" fontWeight="bold">
+                  RefEasy
+                </Typography>
+              </MaterialLink>
+            </Grid>
+          </Grid>
+          <Navbar theme={theme} />
           <Routes>
             <Route
               path="/"
@@ -38,10 +71,14 @@ function App() {
                   </div>
                   <Grid container sx={{ mt: 2 }}>
                     <Grid item xs>
-                      <Link href="/login">Login</Link>
+                      <MaterialLink component={RouterLink} to="/login">
+                        Login
+                      </MaterialLink>
                     </Grid>
                     <Grid item xs>
-                      <Link href="/register">Register</Link>
+                      <MaterialLink component={RouterLink} to="/register">
+                        Register
+                      </MaterialLink>
                     </Grid>
                   </Grid>
                 </Container>
@@ -49,6 +86,10 @@ function App() {
             />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route
+              path="/referral-activity"
+              element={<ReferraActivity theme={theme} />}
+            />
           </Routes>
         </BrowserRouter>
       </div>
