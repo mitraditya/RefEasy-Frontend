@@ -22,7 +22,7 @@ export default function Navbar({ theme, routeName }) {
     ["REFERRAL ACTIVITY", "/referral-activity"],
     ["FIND JOBS", "/find-jobs"],
     ["REFERRAL POLICY", "/referral-policy"],
-    ["MY REFERRAL LINK", "/referral-link"],
+    // ["MY REFERRAL LINK", "/referral-link"],
   ];
 
   return (

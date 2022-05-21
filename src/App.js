@@ -25,6 +25,7 @@ import ReferralActivity from "./Components/ReferralActivity";
 import React from "react";
 import { getUserDetails, logout } from "./Services/ApiService";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import Navbar from "./Components/Navbar";
 
 const theme = createTheme({
   palette: {
@@ -136,6 +137,15 @@ function App() {
               element={
                 <RequireAuth>
                   <ReferralActivity theme={theme} />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/referral-policy"
+              element={
+                <RequireAuth>
+                  <Navbar theme={theme} routeName={"/referral-policy"} />
+                  HR will update Referral Policy Here
                 </RequireAuth>
               }
             />

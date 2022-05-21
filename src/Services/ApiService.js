@@ -37,3 +37,12 @@ export const getUserDetails = () => {
     },
   });
 };
+
+export const getMyReferrals = () => {
+  return axios.get(`${config.SERVER_URL}/api/refer/myreferrals`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+    },
+  });
+};
