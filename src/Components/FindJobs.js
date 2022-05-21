@@ -11,8 +11,8 @@ import { useNavigate } from "react-router-dom";
 
 const columns = [
   {
-    field: "last_edit",
-    headerName: " DATE",
+    field: "created_at",
+    headerName: "DATE",
     width: 250,
     valueFormatter: (params) => {
       return new Date(params.value).toLocaleDateString();
