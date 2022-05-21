@@ -25,6 +25,7 @@ import React from "react";
 import { getUserDetails, logout } from "./Services/ApiService";
 import Navbar from "./Components/Navbar";
 import FindJobs from "./Components/FindJobs";
+import Job from "./Components/Job";
 
 const theme = createTheme({
   palette: {
@@ -174,11 +175,37 @@ function App() {
               element={
                 <RequireAuth>
                   <Navbar theme={theme} routeName={"/referral-policy"} />
-                  HR will update Referral Policy Here
+                  <Box
+                    sx={{
+                      flex: 1,
+                      display: "flex",
+                      justifyContent: "center",
+                      marginBottom: theme.spacing(2),
+                    }}
+                  >
+                    <Typography variant="h3" gutterBottom component="div">
+                      HR will update Referral Policy Here.
+                    </Typography>
+                  </Box>
                 </RequireAuth>
               }
             />
-            <Route path="/find-jobs" element={<FindJobs theme={theme} />} />
+            <Route
+              path="/find-jobs"
+              element={
+                <RequireAuth>
+                  <FindJobs theme={theme} />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/job/:id"
+              element={
+                <RequireAuth>
+                  <Job theme={theme} />
+                </RequireAuth>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </div>
