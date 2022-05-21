@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import Navbar from "./Navbar";
 
-export default function ReferraActivity({ theme }) {
+export default function ReferralActivity({ theme }) {
   const routeName = "/referral-activity";
 
   return (
@@ -63,7 +63,7 @@ export default function ReferraActivity({ theme }) {
                 fontWeight="bold"
                 sx={{ marginBottom: theme.spacing(0.8) }}
               >
-                TOTAL REFERRRALS
+                TOTAL REFERRALS
               </Typography>
               <Typography variant="h5" color="primary.main">
                 0

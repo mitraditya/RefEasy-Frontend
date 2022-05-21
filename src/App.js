@@ -4,22 +4,27 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Home from "./Components/Home";
 import {
-  Container,
   Link as MaterialLink,
   Box,
   Grid,
   Typography,
+  Button,
 } from "@mui/material";
 import {
   BrowserRouter,
   Routes,
   Route,
   Link as RouterLink,
+  useLocation,
+  useNavigate,
+  Navigate,
 } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
-import Navbar from "./Components/Navbar";
-import ReferraActivity from "./Components/ReferralActivity";
+import ReferralActivity from "./Components/ReferralActivity";
+import React from "react";
+import { getUserDetails, logout } from "./Services/ApiService";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const theme = createTheme({
   palette: {
@@ -32,7 +37,43 @@ const theme = createTheme({
   },
 });
 
+function RequireAuth({ children }) {
+  let location = useLocation();
+  const isLoggedIn = localStorage.getItem("access-token");
+
+  if (!isLoggedIn) {
+    // Redirect them to the /login page, but save the current location they were
+    // trying to go to when they were redirected. This allows us to send them
+    // along to that page after they login, which is a nicer user experience
+    // than dropping them off on the home page.
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return children;
+}
+
 function App() {
+  const [userDetails, setUserDetails] = React.useState(null);
+
+  function onLogout() {
+    logout();
+    setUserDetails(null);
+  }
+
+  React.useEffect(() => {
+    async function getUserDetails1() {
+      try {
+        const response = await getUserDetails();
+        console.log(response.data);
+        setUserDetails(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getUserDetails1();
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
@@ -62,14 +103,41 @@ function App() {
                 </Typography>
               </MaterialLink>
             </Grid>
+            <Box width={20} />
+            {userDetails ? (
+              <>
+                <Grid item>
+                  <Typography>
+                    Welcome, {userDetails.user.first_name}
+                  </Typography>
+                  <Box width={20} />
+                  <Button variant="contained" onClick={onLogout}>
+                    Logout
+                  </Button>
+                </Grid>
+              </>
+            ) : (
+              <div></div>
+            )}
           </Grid>
           <Routes>
-            <Route path="/" element={<Home theme={theme} />} />
+            <Route
+              path="/"
+              element={
+                <RequireAuth>
+                  <Home theme={theme} />
+                </RequireAuth>
+              }
+            />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route
               path="/referral-activity"
-              element={<ReferraActivity theme={theme} />}
+              element={
+                <RequireAuth>
+                  <ReferralActivity theme={theme} />
+                </RequireAuth>
+              }
             />
           </Routes>
         </BrowserRouter>

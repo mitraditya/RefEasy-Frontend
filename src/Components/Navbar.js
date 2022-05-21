@@ -32,7 +32,7 @@ export default function Navbar({ theme, routeName }) {
         <Box sx={{ flex: 1, display: "flex", justifyContent: "space-evenly" }}>
           {pages.map((page) => (
             <MaterialLink
-              keu={page[0]}
+              key={page[0]}
               sx={[
                 classes.link,
                 {

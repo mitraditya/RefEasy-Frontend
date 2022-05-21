@@ -11,6 +11,8 @@ import Box from "@mui/material/Box";
 // import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { register } from "../Services/ApiService";
+import { useNavigate } from "react-router";
 
 function Copyright(props) {
   return (
@@ -31,14 +33,33 @@ function Copyright(props) {
 }
 
 export default function Register() {
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
+    registerUser({
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
       email: data.get("email"),
       password: data.get("password"),
+      password2: data.get("password2"),
     });
   };
+
+  async function registerUser(data) {
+    try {
+      const response = await register(data);
+      console.log(response.data);
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -98,7 +119,16 @@ export default function Register() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="new-password"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name="password2"
+                label="Confirm Password"
+                type="password"
+                id="password2"
               />
             </Grid>
             {/* <Grid item xs={12}>

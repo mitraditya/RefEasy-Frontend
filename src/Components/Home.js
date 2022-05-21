@@ -9,11 +9,8 @@ export default function Home({ theme }) {
     <>
       <Navbar theme={theme} routeName={routeName} />
       <Container maxWidth="sm">
-        <div>
-          Welcome to the Home Page! Visit the Login or Register page by clicking
-          on the links below.
-        </div>
-        <Grid container sx={{ mt: 2 }}>
+        <div>Welcome to the Home Page!</div>
+        {/* <Grid container sx={{ mt: 2 }}>
           <Grid item xs>
             <MaterialLink component={RouterLink} to="/login">
               Login
@@ -24,7 +21,7 @@ export default function Home({ theme }) {
               Register
             </MaterialLink>
           </Grid>
-        </Grid>
+        </Grid> */}
       </Container>
     </>
   );

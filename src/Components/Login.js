@@ -11,6 +11,8 @@ import Box from "@mui/material/Box";
 // import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { login } from "../Services/ApiService";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -31,14 +33,34 @@ function Copyright(props) {
 }
 
 export default function Login() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
+    loginUser({ email: data.get("email"), password: data.get("password") });
   };
+
+  async function loginUser(data) {
+    try {
+      const response = await login(data);
+      console.log(response.data);
+      const accessToken = response.data.access;
+      console.log(accessToken);
+      const refreshToken = response.data.refresh;
+      localStorage.setItem("access-token", accessToken);
+      localStorage.setItem("refresh-token", refreshToken);
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -78,10 +100,10 @@ export default function Login() {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
+          /> */}
           <Button
             type="submit"
             fullWidth
