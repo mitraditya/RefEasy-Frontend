@@ -2,6 +2,7 @@ import "./App.css";
 import logo from "./TI-logo.png";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
+import Home from "./Components/Home";
 import {
   Container,
   Link as MaterialLink,
@@ -24,6 +25,9 @@ const theme = createTheme({
   palette: {
     primary: {
       main: red[900],
+    },
+    secondary: {
+      main: "#000000",
     },
   },
 });
@@ -59,31 +63,8 @@ function App() {
               </MaterialLink>
             </Grid>
           </Grid>
-          <Navbar theme={theme} />
           <Routes>
-            <Route
-              path="/"
-              element={
-                <Container maxWidth="sm">
-                  <div>
-                    Welcome to the Home Page! Visit the Login or Register page
-                    by clicking on the links below.
-                  </div>
-                  <Grid container sx={{ mt: 2 }}>
-                    <Grid item xs>
-                      <MaterialLink component={RouterLink} to="/login">
-                        Login
-                      </MaterialLink>
-                    </Grid>
-                    <Grid item xs>
-                      <MaterialLink component={RouterLink} to="/register">
-                        Register
-                      </MaterialLink>
-                    </Grid>
-                  </Grid>
-                </Container>
-              }
-            />
+            <Route path="/" element={<Home theme={theme} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route
