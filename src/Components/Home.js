@@ -1,12 +1,12 @@
 import { Container } from "@mui/material";
 import Navbar from "./Navbar";
 
-export default function Home({ theme }) {
+export default function Home({ theme, role }) {
   const routeName = "/";
 
   return (
     <>
-      <Navbar theme={theme} routeName={routeName} />
+      <Navbar theme={theme} routeName={routeName} role={role} />
       <Container maxWidth="sm">
         <div>Welcome to the Home Page!</div>
         {/* <Grid container sx={{ mt: 2 }}>

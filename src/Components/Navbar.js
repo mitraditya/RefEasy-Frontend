@@ -8,7 +8,7 @@ import {
 import { Link as RouterLink } from "react-router-dom";
 import React from "react";
 
-export default function Navbar({ theme, routeName }) {
+export default function Navbar({ theme, routeName, role }) {
   const classes = {
     link: {
       textDecoration: "none",
@@ -24,6 +24,8 @@ export default function Navbar({ theme, routeName }) {
     ["REFERRAL POLICY", "/referral-policy"],
     // ["MY REFERRAL LINK", "/referral-link"],
   ];
+
+  // if (role === "APP") pages.splice(1,1);
 
   return (
     <AppBar position="static" sx={{ marginBottom: 10 }}>

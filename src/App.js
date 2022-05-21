@@ -52,7 +52,36 @@ function RequireAuth({ children }) {
   return children;
 }
 
+// function RequireRole({ children }) {
+//   const location = useLocation();
+//   const from = location.state?.from?.pathname || "/";
+//   const [userDetails, setUserDetails] = React.useState(null);
+//   React.useEffect(() => {
+//     async function getUserDetails1() {
+//       try {
+//         const response = await getUserDetails();
+//         console.log(response.data);
+//         setUserDetails(response.data);
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     }
+
+//     getUserDetails1();
+//   }, []);
+
+//   if(userDetails){
+//     if(userDetails.role === "APP"){
+//       return <Navigate to={from} />
+//     }
+//   }
+
+// }
+
 function App() {
+  // Only gets executed once, so doesn't update on redirect to login/register.
+  // LocalStorage could be used to store user data to solve this issue
+
   const [userDetails, setUserDetails] = React.useState(null);
 
   function onLogout() {
@@ -70,8 +99,7 @@ function App() {
         console.log(error);
       }
     }
-
-    getUserDetails1();
+    if (localStorage.getItem("access-token")) getUserDetails1();
   }, []);
 
   return (
@@ -104,20 +132,14 @@ function App() {
               </MaterialLink>
             </Grid>
             <Box width={20} />
-            {userDetails ? (
-              <>
-                <Grid item>
-                  <Typography>
-                    Welcome, {userDetails.user.first_name}
-                  </Typography>
-                  <Box width={20} />
-                  <Button variant="contained" onClick={onLogout}>
-                    Logout
-                  </Button>
-                </Grid>
-              </>
-            ) : (
-              <div></div>
+            {userDetails && (
+              <Grid item>
+                <Typography>Welcome, {userDetails.user.first_name}</Typography>
+                <Box width={20} />
+                <Button variant="contained" onClick={onLogout}>
+                  Logout
+                </Button>
+              </Grid>
             )}
           </Grid>
           <Routes>
@@ -125,20 +147,28 @@ function App() {
               path="/"
               element={
                 <RequireAuth>
-                  <Home theme={theme} />
+                  {userDetails && (
+                    <Home theme={theme} role={userDetails.role} />
+                  )}
                 </RequireAuth>
               }
             />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            {/* {userDetails && userDetails.role !== "APP" ? ( */}
             <Route
               path="/referral-activity"
               element={
                 <RequireAuth>
-                  <ReferralActivity theme={theme} />
+                  {userDetails && (
+                    <ReferralActivity theme={theme} role={userDetails.role} />
+                  )}
                 </RequireAuth>
               }
             />
+            {/* ) : (
+              <></>
+            )} */}
             <Route
               path="/referral-policy"
               element={

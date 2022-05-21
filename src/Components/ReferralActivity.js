@@ -11,7 +11,7 @@ import React from "react";
 import { getMyReferrals } from "../Services/ApiService";
 import Navbar from "./Navbar";
 
-export default function ReferralActivity({ theme }) {
+export default function ReferralActivity({ theme, role }) {
   const routeName = "/referral-activity";
   const [myReferrals, setMyReferrals] = React.useState([]);
 
@@ -33,84 +33,90 @@ export default function ReferralActivity({ theme }) {
       <Navbar theme={theme} routeName={routeName} />
       <Container component="main">
         <CssBaseline />
-        <Card
-          sx={{
-            paddingTop: theme.spacing(3),
-            paddingBottom: theme.spacing(3),
-            marginBottom: theme.spacing(15),
-          }}
-        >
-          <Box
+        {role !== "APP" && (
+          <Card
             sx={{
-              flex: 1,
-              display: "flex",
-              justifyContent: "center",
-              marginBottom: theme.spacing(2),
+              paddingTop: theme.spacing(3),
+              paddingBottom: theme.spacing(3),
+              marginBottom: theme.spacing(15),
             }}
           >
-            <Typography variant="h4" color="primary.main" sx={{ fontSize: 25 }}>
-              REFERRAL ACTIVITY
-            </Typography>
-          </Box>
-          <Box
-            sx={{ flex: 1, display: "flex", justifyContent: "space-around" }}
-          >
             <Box
               sx={{
+                flex: 1,
                 display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: theme.spacing(2),
               }}
             >
               <Typography
-                variant="body2"
-                fontWeight="bold"
-                sx={{ marginBottom: theme.spacing(0.8) }}
+                variant="h4"
+                color="primary.main"
+                sx={{ fontSize: 25 }}
               >
-                SHARED LINKS
-              </Typography>
-              <Typography variant="h5" color="primary.main">
-                0
+                REFERRAL ACTIVITY
               </Typography>
             </Box>
             <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
+              sx={{ flex: 1, display: "flex", justifyContent: "space-around" }}
             >
-              <Typography
-                variant="body2"
-                fontWeight="bold"
-                sx={{ marginBottom: theme.spacing(0.8) }}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
               >
-                TOTAL REFERRALS
-              </Typography>
-              <Typography variant="h5" color="primary.main">
-                0
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Typography
-                variant="body2"
-                fontWeight="bold"
-                sx={{ marginBottom: theme.spacing(0.8) }}
+                <Typography
+                  variant="body2"
+                  fontWeight="bold"
+                  sx={{ marginBottom: theme.spacing(0.8) }}
+                >
+                  SHARED LINKS
+                </Typography>
+                <Typography variant="h5" color="primary.main">
+                  0
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
               >
-                JOB-SPECIFIC REFERRALS
-              </Typography>
-              <Typography variant="h5" color="primary.main">
-                0
-              </Typography>
+                <Typography
+                  variant="body2"
+                  fontWeight="bold"
+                  sx={{ marginBottom: theme.spacing(0.8) }}
+                >
+                  TOTAL REFERRALS
+                </Typography>
+                <Typography variant="h5" color="primary.main">
+                  0
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  variant="body2"
+                  fontWeight="bold"
+                  sx={{ marginBottom: theme.spacing(0.8) }}
+                >
+                  JOB-SPECIFIC REFERRALS
+                </Typography>
+                <Typography variant="h5" color="primary.main">
+                  0
+                </Typography>
+              </Box>
             </Box>
-          </Box>
-        </Card>
+          </Card>
+        )}
         <Box
           sx={{
             flex: 1,
