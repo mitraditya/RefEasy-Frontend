@@ -16,7 +16,6 @@ import {
   Route,
   Link as RouterLink,
   useLocation,
-  useNavigate,
   Navigate,
 } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -24,8 +23,8 @@ import { red } from "@mui/material/colors";
 import ReferralActivity from "./Components/ReferralActivity";
 import React from "react";
 import { getUserDetails, logout } from "./Services/ApiService";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Navbar from "./Components/Navbar";
+import FindJobs from "./Components/FindJobs";
 
 const theme = createTheme({
   palette: {
@@ -149,6 +148,7 @@ function App() {
                 </RequireAuth>
               }
             />
+            <Route path="/find-jobs" element={<FindJobs theme={theme} />} />
           </Routes>
         </BrowserRouter>
       </div>
