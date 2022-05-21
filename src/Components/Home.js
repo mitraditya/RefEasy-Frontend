@@ -1,5 +1,4 @@
-import { Container, Grid, Link as MaterialLink } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Container } from "@mui/material";
 import Navbar from "./Navbar";
 
 export default function Home({ theme }) {
