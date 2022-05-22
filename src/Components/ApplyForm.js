@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useParams } from "react-router";
 import {
   TextField,
@@ -7,14 +7,19 @@ import {
   CssBaseline,
   Box,
   Button,
+  Alert,
+  Collapse
 } from "@mui/material";
 import Navbar from "./Navbar";
 import { apply } from "../Services/ApiService";
+import { useNavigate } from "react-router-dom";
 
 export default function ApplyForm({ theme }) {
   const params = useParams();
   const location = useLocation();
   const refEmp = location.state?.refEmp || "";
+  let navigate = useNavigate(); 
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -26,6 +31,10 @@ export default function ApplyForm({ theme }) {
     try {
       const response = await apply(params.id, refLink);
       console.log(response.data);
+      setOpen(true);
+      setTimeout(() => {
+        navigate('/referral-activity');
+      }, 2500);
     } catch (error) {
       console.log(error);
     }
@@ -36,6 +45,11 @@ export default function ApplyForm({ theme }) {
       <Navbar theme={theme} />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+        <Collapse in={open}>
+          <Alert sx={{ mb: 3 }}>
+            Successfully Applied.
+          </Alert>
+        </Collapse>
         <Box
           sx={{
             marginTop: 8,
