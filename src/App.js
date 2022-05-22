@@ -10,6 +10,7 @@ import {
   Grid,
   Typography,
   Button,
+  Toolbar,
 } from "@mui/material";
 import {
   BrowserRouter,
@@ -111,17 +112,15 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <BrowserRouter>
-          <Grid container alignItems="center">
-            <Grid item>
+          <Box sx={{ flexGrow: 1 }}>
+            <Toolbar>
               <Box
                 component="img"
                 src={logo}
                 maxWidth={{ xs: 160 }}
                 maxHeight={{ xs: 90 }}
+                sx={{ mr: 2 }}
               />
-            </Grid>
-            <Box width={20} />
-            <Grid item>
               <MaterialLink
                 component={RouterLink}
                 to="/"
@@ -135,18 +134,27 @@ function App() {
                   RefEasy
                 </Typography>
               </MaterialLink>
-            </Grid>
-            <Box width={20} />
-            {userDetails && (
-              <Grid item>
-                <Typography>Welcome, {userDetails.user.first_name}</Typography>
-                <Box width={20} />
-                <Button variant="contained" onClick={onLogout}>
-                  Logout
-                </Button>
-              </Grid>
-            )}
-          </Grid>
+              <Box sx={{ flexGrow: 1 }} />
+              <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                {userDetails && (
+                  <Grid item>
+                    <Typography
+                      sx={{ display: "inline-block", marginRight: 2 }}
+                    >
+                      Welcome, {userDetails.user.first_name}
+                    </Typography>
+                    <Button
+                      variant="contained"
+                      onClick={onLogout}
+                      sc={{ display: "inline-block" }}
+                    >
+                      Logout
+                    </Button>
+                  </Grid>
+                )}
+              </Box>
+            </Toolbar>
+          </Box>
           <Routes>
             <Route
               path="/"

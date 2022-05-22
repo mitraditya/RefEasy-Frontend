@@ -1,5 +1,6 @@
-import { Container } from "@mui/material";
+import { Container, Box, Typography } from "@mui/material";
 import Navbar from "./Navbar";
+import img from "../company.jpg";
 
 export default function Home({ theme, role }) {
   const routeName = "/";
@@ -7,20 +8,25 @@ export default function Home({ theme, role }) {
   return (
     <>
       <Navbar theme={theme} routeName={routeName} role={role} />
-      <Container maxWidth="sm">
-        <div>Welcome to the Home Page!</div>
-        {/* <Grid container sx={{ mt: 2 }}>
-          <Grid item xs>
-            <MaterialLink component={RouterLink} to="/login">
-              Login
-            </MaterialLink>
-          </Grid>
-          <Grid item xs>
-            <MaterialLink component={RouterLink} to="/register">
-              Register
-            </MaterialLink>
-          </Grid>
-        </Grid> */}
+      <Container>
+        <Box
+          sx={{
+            flex: 1,
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: theme.spacing(1),
+          }}
+        >
+          <Box
+            component="img"
+            src={img}
+            maxWidth={{ xs: 900 }}
+            maxHeight={{ xs: 600 }}
+          />
+          <Typography variant="h4" fontWeight="bold">
+            Welcome to the Home Page!
+          </Typography>
+        </Box>
       </Container>
     </>
   );
