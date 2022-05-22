@@ -9,6 +9,7 @@ import {
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import { useParams } from "react-router-dom";
+import ConfirmBox from "./ConfirmBox";
 
 const statuses = [
   {
@@ -46,9 +47,11 @@ export default function Application({ theme }) {
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [email, setEmail] = useState("");
-  const [job_id, setJobId] = useState("");
+  const [jobId, setJobId] = useState("");
   const [ref, setRef] = useState("");
   const [status, setStatus] = useState("");
+  const [copyStatus, setCopyStatus] = useState("");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     fetch("https://refeasy.pythonanywhere.com/api/refer/all-referrals/", {
@@ -59,7 +62,7 @@ export default function Application({ theme }) {
     })
       .then((data) => data.json())
       .then((data) => {
-          console.log(data);
+        console.log(data);
         data.results.forEach((element) => {
           if (element.id == params.id) {
             console.log(element);
@@ -76,24 +79,38 @@ export default function Application({ theme }) {
       });
   }, [params.id]);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const routeName = `/job/${params.id}`;
 
   const handleChange = (event) => {
-    setStatus(event.target.value);
-    
+    handleClickOpen();
+    setCopyStatus(event.target.value)
+  };
+
+  const handleYes = () => {
+    setStatus(copyStatus);
+
     fetch("https://refeasy.pythonanywhere.com/api/refer/updatestatus/", {
-      method: 'POST',
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("access-token")}`,
       },
       body: JSON.stringify({
-          job_slug: job_id,
-          app_email: email,
-          status: event.target.value
-      })
+        job_slug: jobId,
+        app_email: email,
+        status: copyStatus,
+      }),
     });
-  };
+    handleClose();
+  }
 
   return (
     <>
@@ -133,7 +150,7 @@ export default function Application({ theme }) {
           component="div"
           sx={{ marginTop: 2 }}
         >
-          Applied to job: {job_id}
+          Applied to job: {jobId}
         </Typography>
         <Typography
           variant="h5"
@@ -173,6 +190,7 @@ export default function Application({ theme }) {
           </NativeSelect>
         </FormControl>
       </Container>
+      <ConfirmBox title="Are you sure you want to update the status?" open={open} handleYes={handleYes} handleClose={handleClose} />
     </>
   );
 }

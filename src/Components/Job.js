@@ -51,7 +51,7 @@ export default function Job({ theme, role }) {
       <Navbar theme={theme} routeName={routeName} />
       <Container component="main">
         <CssBaseline />
-        <Typography variant="body1" gutterBottom component="div">
+        <Typography variant="body1" >
           Posted {new Date(date).toLocaleDateString()}
         </Typography>
         <Box
@@ -63,8 +63,6 @@ export default function Job({ theme, role }) {
         >
           <Typography
             variant="h3"
-            gutterBottom
-            component="div"
             sx={{ marginTop: 3 }}
           >
             {title}
@@ -85,8 +83,6 @@ export default function Job({ theme, role }) {
         </Box>
         <Typography
           variant="body1"
-          gutterBottom
-          component="div"
           sx={{ marginTop: 3 }}
         >
           {loc}
@@ -96,8 +92,6 @@ export default function Job({ theme, role }) {
         </Typography>
         <Typography
           variant="h5"
-          gutterBottom
-          component="div"
           sx={{ marginTop: 1 }}
         >
           {params.id}
@@ -107,8 +101,6 @@ export default function Job({ theme, role }) {
         </Typography>
         <Typography
           variant="h5"
-          gutterBottom
-          component="div"
           sx={{ marginTop: 1 }}
         >
           {category}
@@ -118,8 +110,6 @@ export default function Job({ theme, role }) {
         </Typography>
         <Typography
           variant="h5"
-          gutterBottom
-          component="div"
           sx={{ marginTop: 1 }}
         >
           {type}
@@ -129,9 +119,7 @@ export default function Job({ theme, role }) {
         </Typography>
         <Typography
           variant="h5"
-          gutterBottom
-          component="div"
-          sx={{ marginTop: 1 }}
+          sx={{ marginTop: 1, marginRight: 2 }}
         >
           {desc}
         </Typography>
