@@ -26,6 +26,8 @@ import { getUserDetails, logout } from "./Services/ApiService";
 import Navbar from "./Components/Navbar";
 import FindJobs from "./Components/FindJobs";
 import Job from "./Components/Job";
+import ApplicationsList from "./Components/ApplicationsList";
+import Application from "./Components/Application";
 
 const theme = createTheme({
   palette: {
@@ -203,6 +205,22 @@ function App() {
               element={
                 <RequireAuth>
                   <Job theme={theme} />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <RequireAuth>
+                  <ApplicationsList theme={theme} />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/admin/application/:id"
+              element={
+                <RequireAuth>
+                  <Application theme={theme} />
                 </RequireAuth>
               }
             />
