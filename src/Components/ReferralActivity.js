@@ -149,8 +149,12 @@ export default function ReferralActivity({ theme, role }) {
                 >
                   <CardHeader title="Job Title" subheader={myRef.job.title} />
                   <CardHeader
-                    title="Applicant Name"
-                    subheader={myRef.applicant.user.first_name}
+                    title={role === "APP" ? "Referred By" : "Applicant Name"}
+                    subheader={
+                      role === "APP"
+                        ? myRef.ref_emp.user.first_name
+                        : myRef.applicant.user.first_name
+                    }
                   />
                   <CardHeader title="Status" subheader={myRef.status} />
                   {/* <CardContent>
