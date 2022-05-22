@@ -22,10 +22,10 @@ export default function Navbar({ theme, routeName, role }) {
     ["REFERRAL ACTIVITY", "/referral-activity"],
     ["FIND JOBS", "/find-jobs"],
     ["REFERRAL POLICY", "/referral-policy"],
-    // ["MY REFERRAL LINK", "/referral-link"],
+    ["APPLICATIONS", "/admin"]
   ];
 
-  // if (role === "APP") pages.splice(1,1);
+   if (role !== "HR") pages.splice(4,1);
 
   return (
     <AppBar position="static" sx={{ marginBottom: 10 }}>
