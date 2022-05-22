@@ -3,6 +3,7 @@ import logo from "./TI-logo.png";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Home from "./Components/Home";
+import Refer from "./Components/Refer";
 import {
   Link as MaterialLink,
   Box,
@@ -28,6 +29,7 @@ import FindJobs from "./Components/FindJobs";
 import Job from "./Components/Job";
 import ApplicationsList from "./Components/ApplicationsList";
 import Application from "./Components/Application";
+import ApplyForm from "./Components/ApplyForm";
 
 const theme = createTheme({
   palette: {
@@ -204,7 +206,23 @@ function App() {
               path="/job/:id"
               element={
                 <RequireAuth>
-                  <Job theme={theme} />
+                  {userDetails && <Job theme={theme} role={userDetails.role} />}
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/refer/apply/:id/:refEmp"
+              element={
+                <RequireAuth>
+                  <Refer />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/job/:id/apply/"
+              element={
+                <RequireAuth>
+                  <ApplyForm />
                 </RequireAuth>
               }
             />

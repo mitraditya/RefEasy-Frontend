@@ -46,3 +46,30 @@ export const getMyReferrals = () => {
     },
   });
 };
+
+export const refer = (jobSlug) => {
+  return axios.get(
+    `${config.SERVER_URL}/api/refer/generatereferral/${jobSlug}/`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+      },
+    }
+  );
+};
+
+export const apply = (jobSlug, refLink) => {
+  return axios.post(
+    `${config.SERVER_URL}/api/refer/apply/${jobSlug}/`,
+    {
+      referral_link: refLink,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+      },
+    }
+  );
+};
