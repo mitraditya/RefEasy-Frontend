@@ -55,6 +55,7 @@ export default function Login() {
       localStorage.setItem("access-token", accessToken);
       localStorage.setItem("refresh-token", refreshToken);
       navigate(from, { replace: true });
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
