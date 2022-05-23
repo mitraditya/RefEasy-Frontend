@@ -13,36 +13,29 @@ import ConfirmBox from "./ConfirmBox";
 
 const statuses = [
   {
-    value: "L01",
     label: "Level-1",
   },
   {
-    value: "L02",
     label: "Level-2",
   },
   {
-    value: "L03",
     label: "Level-3",
   },
   {
-    value: "L04",
     label: "Level-4",
   },
   {
-    value: "L05",
     label: "Level-5",
   },
   {
-    value: "ACC",
     label: "Accepted",
   },
   {
-    value: "REJ",
     label: "Rejected",
   },
 ];
 
-export default function Application({ theme }) {
+export default function Application({ theme, role }) {
   const params = useParams();
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
@@ -91,7 +84,7 @@ export default function Application({ theme }) {
 
   const handleChange = (event) => {
     handleClickOpen();
-    setCopyStatus(event.target.value)
+    setCopyStatus(event.target.value);
   };
 
   const handleYes = () => {
@@ -110,11 +103,11 @@ export default function Application({ theme }) {
       }),
     });
     handleClose();
-  }
+  };
 
   return (
     <>
-      <Navbar theme={theme} routeName={routeName} />
+      <Navbar theme={theme} routeName={routeName} role={role} />
       <Container component="main">
         <CssBaseline />
         <Typography variant="h5" gutterBottom component="div">
@@ -185,12 +178,17 @@ export default function Application({ theme }) {
             onChange={handleChange}
           >
             {statuses.map((element) => {
-              return <option value={element.value}>{element.label}</option>;
+              return <option value={element.label}>{element.label}</option>;
             })}
           </NativeSelect>
         </FormControl>
       </Container>
-      <ConfirmBox title="Are you sure you want to update the status?" open={open} handleYes={handleYes} handleClose={handleClose} />
+      <ConfirmBox
+        title="Are you sure you want to update the status?"
+        open={open}
+        handleYes={handleYes}
+        handleClose={handleClose}
+      />
     </>
   );
 }

@@ -1,8 +1,4 @@
-import {
-  CssBaseline,
-  Container,
-  Typography,
-} from "@mui/material";
+import { CssBaseline, Container, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
 import React, { useState, useEffect } from "react";
@@ -25,7 +21,7 @@ const columns = [
   { field: "position_type", headerName: "JOB TYPE", width: 200 },
 ];
 
-export default function FindJobs({ theme }) {
+export default function FindJobs({ theme, role }) {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -35,16 +31,16 @@ export default function FindJobs({ theme }) {
   }, []);
 
   const routeName = "/find-jobs";
-  let navigate = useNavigate(); 
+  let navigate = useNavigate();
 
   const selectJob = (params) => {
-      console.log(params.row);
-      navigate(`/job/${params.row.slug}`)
-  }
+    console.log(params.row);
+    navigate(`/job/${params.row.slug}`);
+  };
 
   return (
     <>
-      <Navbar theme={theme} routeName={routeName} />
+      <Navbar theme={theme} routeName={routeName} role={role} />
       <Container component="main">
         <CssBaseline />
         <Box

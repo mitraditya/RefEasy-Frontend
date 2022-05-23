@@ -7,7 +7,7 @@ import {
   Alert,
   Collapse,
   IconButton,
-  Tooltip
+  Tooltip,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
@@ -54,7 +54,7 @@ export default function Job({ theme, role }) {
     try {
       const response = await refer(params.id);
       console.log(response.data);
-      setAlertMessage(response.data.referral_link)
+      setAlertMessage(response.data.referral_link);
       setOpen(true);
     } catch (error) {
       console.log(error);
@@ -63,14 +63,24 @@ export default function Job({ theme, role }) {
 
   return (
     <>
-      <Navbar theme={theme} routeName={routeName} />
+      <Navbar theme={theme} routeName={routeName} role={role} />
       <Container component="main">
         <CssBaseline />
         <Collapse in={open}>
           <Alert
-            icon={<Tooltip disableFocusListener title="Copy to Clipboard">
-            <IconButton size="small" onClick={() => {navigator.clipboard.writeText(alertMessage)}}> <ContentCopyIcon fontSize="inherit" /> </IconButton>
-          </Tooltip>}
+            icon={
+              <Tooltip disableFocusListener title="Copy to Clipboard">
+                <IconButton
+                  size="small"
+                  onClick={() => {
+                    navigator.clipboard.writeText(alertMessage);
+                  }}
+                >
+                  {" "}
+                  <ContentCopyIcon fontSize="inherit" />{" "}
+                </IconButton>
+              </Tooltip>
+            }
             action={
               <IconButton
                 aria-label="close"

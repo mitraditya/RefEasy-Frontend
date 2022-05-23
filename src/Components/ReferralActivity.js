@@ -11,16 +11,6 @@ import React from "react";
 import { getMyReferrals } from "../Services/ApiService";
 import Navbar from "./Navbar";
 
-const statuses = {
-  L01: "Level-1",
-  L02: "Level-2",
-  L03: "Level-3",
-  L04: "Level-4",
-  L05: "Level-5",
-  ACC: "Accepted",
-  REJ: "Rejected"
-}
-
 export default function ReferralActivity({ theme, role }) {
   const routeName = "/referral-activity";
   const [myReferrals, setMyReferrals] = React.useState([]);
@@ -40,7 +30,7 @@ export default function ReferralActivity({ theme, role }) {
 
   return (
     <>
-      <Navbar theme={theme} routeName={routeName} />
+      <Navbar theme={theme} routeName={routeName} role={role} />
       <Container component="main">
         <CssBaseline />
         {role !== "APP" && (
@@ -159,14 +149,16 @@ export default function ReferralActivity({ theme, role }) {
                 >
                   <CardHeader title="Job Title" subheader={myRef.job.title} />
                   <CardHeader
-                    title={role === "APP" ? "Referred By" : "Applicant Referred"}
+                    title={
+                      role === "APP" ? "Referred By" : "Applicant Referred"
+                    }
                     subheader={
                       role === "APP"
                         ? myRef.ref_emp.user.first_name
                         : myRef.applicant.user.first_name
                     }
                   />
-                  <CardHeader title="Status" subheader={statuses[myRef.status]} />
+                  <CardHeader title="Status" subheader={myRef.status} />
                   {/* <CardContent>
                     <Typography variant="body2" color="text.secondary">
                       This impressive paella is a perfect party dish and a fun

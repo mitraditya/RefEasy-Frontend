@@ -186,19 +186,27 @@ function App() {
               path="/referral-policy"
               element={
                 <RequireAuth>
-                  <Navbar theme={theme} routeName={"/referral-policy"} />
-                  <Box
-                    sx={{
-                      flex: 1,
-                      display: "flex",
-                      justifyContent: "center",
-                      marginBottom: theme.spacing(2),
-                    }}
-                  >
-                    <Typography variant="h3" gutterBottom component="div">
-                      HR will update Referral Policy Here.
-                    </Typography>
-                  </Box>
+                  {userDetails && (
+                    <>
+                      <Navbar
+                        theme={theme}
+                        routeName={"/referral-policy"}
+                        role={userDetails.role}
+                      />
+                      <Box
+                        sx={{
+                          flex: 1,
+                          display: "flex",
+                          justifyContent: "center",
+                          marginBottom: theme.spacing(2),
+                        }}
+                      >
+                        <Typography variant="h3" gutterBottom component="div">
+                          HR will update Referral Policy Here.
+                        </Typography>
+                      </Box>
+                    </>
+                  )}
                 </RequireAuth>
               }
             />
@@ -206,7 +214,9 @@ function App() {
               path="/find-jobs"
               element={
                 <RequireAuth>
-                  <FindJobs theme={theme} />
+                  {userDetails && (
+                    <FindJobs theme={theme} role={userDetails.role} />
+                  )}
                 </RequireAuth>
               }
             />
@@ -238,7 +248,9 @@ function App() {
               path="/admin"
               element={
                 <RequireAuth>
-                  <ApplicationsList theme={theme} />
+                  {userDetails && (
+                    <ApplicationsList theme={theme} role={userDetails.role} />
+                  )}
                 </RequireAuth>
               }
             />
@@ -246,7 +258,9 @@ function App() {
               path="/admin/application/:id"
               element={
                 <RequireAuth>
-                  <Application theme={theme} />
+                  {userDetails && (
+                    <Application theme={theme} role={userDetails.role} />
+                  )}
                 </RequireAuth>
               }
             />

@@ -25,7 +25,7 @@ const columns = [
     width: 300,
     valueGetter: (params) => {
       return params.value.email;
-    }
+    },
   },
   {
     field: "job",
@@ -33,7 +33,7 @@ const columns = [
     width: 250,
     valueGetter: (params) => {
       return params.value.slug;
-    }
+    },
   },
   {
     field: "ref_emp",
@@ -41,12 +41,12 @@ const columns = [
     width: 300,
     valueGetter: (params) => {
       return params.value.email;
-    }
+    },
   },
   { field: "status", headerName: "STATUS", width: 300 },
 ];
 
-export default function ApplicationsList({ theme }) {
+export default function ApplicationsList({ theme, role }) {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function ApplicationsList({ theme }) {
 
   return (
     <>
-      <Navbar theme={theme} routeName={routeName} />
+      <Navbar theme={theme} routeName={routeName} role={role} />
       <Container component="main">
         <CssBaseline />
         <Box

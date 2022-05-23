@@ -8,7 +8,7 @@ import {
   Box,
   Button,
   Alert,
-  Collapse
+  Collapse,
 } from "@mui/material";
 import Navbar from "./Navbar";
 import { apply } from "../Services/ApiService";
@@ -18,7 +18,7 @@ export default function ApplyForm({ theme }) {
   const params = useParams();
   const location = useLocation();
   const refEmp = location.state?.refEmp || "";
-  let navigate = useNavigate(); 
+  let navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const handleSubmit = (event) => {
@@ -33,10 +33,11 @@ export default function ApplyForm({ theme }) {
       console.log(response.data);
       setOpen(true);
       setTimeout(() => {
-        navigate('/referral-activity');
+        navigate("/referral-activity");
       }, 2500);
     } catch (error) {
       console.log(error);
+      alert("You have already applied to this job!");
     }
   }
 
@@ -46,9 +47,7 @@ export default function ApplyForm({ theme }) {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Collapse in={open}>
-          <Alert sx={{ mb: 3 }}>
-            Successfully Applied.
-          </Alert>
+          <Alert sx={{ mb: 3 }}>Successfully Applied.</Alert>
         </Collapse>
         <Box
           sx={{
